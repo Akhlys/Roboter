@@ -4,6 +4,8 @@ Roboter is an autoclicker (and autokeypresser) for both linux, windows and mac (
 
 Word of warning: It is only on github because it was requested, I don't really use github. I might fail to see pull requests/issues or be slow to react to them, sorry for that.
 
+Main website: [https://double-helix.industries/applications/roboter/](https://double-helix.industries/applications/roboter/)
+
 ## Requirements
 
 Java version 8 or newer.
@@ -11,4 +13,4 @@ For Hotkeys to work, check the requirements of the used library jnativehook over
 
 ## Builds
 
-You can find a build on the [main website](https://double-helix.industries/applications/roboter/)
+You can find a build on the [main website](https://double-helix.industries/applications/roboter/) or on the [Releases tab](https://github.com/Akhlys/Roboter/releases/)
