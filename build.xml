@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="create_jar" name="Roboter">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="Roboter.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="lib/jnativehook-2.2-20201029.233701-36.jar"/>
+        <pathelement location="lib/tablelayout.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="init" name="build">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="Roboter.classpath"/>
+        </javac>
+    </target>
+    <target name="RoboterGui">
+        <java classname="klaue.roboter.gui.RoboterGui" failonerror="true" fork="yes">
+            <classpath refid="Roboter.classpath"/>
+        </java>
+    </target>
+  	<target depends="build" name="create_jar">
+  	        <jar destfile="build/Roboter.jar" filesetmanifest="mergewithoutmain">
+  	            <manifest>
+  	                <attribute name="Main-Class" value="klaue.roboter.gui.RoboterGui"/>
+  	                <attribute name="Class-Path" value="."/>
+  	            </manifest>
+  	            <fileset dir="bin"/>
+  	            <zipfileset excludes="META-INF/*.SF" src="lib/jnativehook-2.2-20201029.233701-36.jar"/>
+  	            <zipfileset excludes="META-INF/*.SF" src="lib/tablelayout.jar"/>
+  	        </jar>
+  	    </target>
+</project>
