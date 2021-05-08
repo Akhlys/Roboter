@@ -13,4 +13,4 @@ For Hotkeys to work, check the requirements of the used library jnativehook over
 
 ## Builds
 
-You can find a build on the [main website](https://double-helix.industries/applications/roboter/) or on the [Releases tab](https://github.com/Akhlys/Roboter/releases/)
+You can find a build on the [main website](https://double-helix.industries/applications/roboter/) or on the [releases tab](https://github.com/Akhlys/Roboter/releases/)
