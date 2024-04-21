@@ -13,6 +13,11 @@ public class AutoActionsPerformer implements Runnable {
 	ActionsPacket actionsPacket = null;
 	boolean stopped = true;
 	boolean abort = false;
+	private static boolean isMac = false;
+	static {
+		String OS = System.getProperty("os.name", "generic").toLowerCase();
+		isMac = OS.indexOf("mac") >= 0 || OS.indexOf("darwin") >= 0;
+	}
 
 	Robot robot = new Robot();
 	
@@ -58,6 +63,11 @@ public class AutoActionsPerformer implements Runnable {
 					if (this.actionsPacket.returnMouse) {
 						prePosition = MouseInfo.getPointerInfo().getLocation();
 					}
+				} else if (isMac) {
+					// mac has a problem with "clicking where the mouse is" because Roboters internal clicking location
+					// is not updated after the first click so each mousePress() lands on that location
+					position = MouseInfo.getPointerInfo().getLocation();
+					moveMouse = true;
 				}
 			}
 			
