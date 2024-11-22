@@ -13,7 +13,7 @@ import klaue.roboter.actions.EventType;
 public class ActionsTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = -8547814588061509694L;
 	
-	private String[] columnNames = {"Description", "Button", "Position", "Delay (ms)"};
+	private String[] columnNames = {"Description", "Button", "Position", "Delay (ms)", "Delay \u25CF\u25CB (ms)"};
 	ArrayList<AutoAction> actions = new ArrayList<>();
 
 	public ArrayList<AutoAction> getActions() {
@@ -110,6 +110,8 @@ public class ActionsTableModel extends AbstractTableModel {
 				return null;
 			case 3:
 				return aa.getDelay();
+			case 4:
+				return aa.getDelayDownUp();
 			default:
 				return null;
 		}

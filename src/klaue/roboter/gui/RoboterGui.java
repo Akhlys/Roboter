@@ -195,7 +195,7 @@ public class RoboterGui extends JFrame implements ActionListener, ListSelectionL
 		this.lblRepetitions.setToolTipText(reps);
 		this.txtRepetitions.setToolTipText(reps);
 		
-		this.chkReturnMouse.setToolTipText("After each click, returns the mouse to the position it was before clicking");
+		this.chkReturnMouse.setToolTipText("<html>After each auto-click, returns the mouse to the position it was before clicking.</html>");
 		
 		this.btnHotkeySettings.setToolTipText("Change hotkeys");
 	}

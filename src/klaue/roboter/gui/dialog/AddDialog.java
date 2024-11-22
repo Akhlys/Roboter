@@ -37,7 +37,11 @@ public class AddDialog extends JDialog implements ActionListener {
 	JLabel lblType = new JLabel("Type:");
 	JComboBox<EventType> typeBox = new JComboBox<>(EventType.values());
 
-	JLabel lblDelay = new JLabel("Delay after:");
+	JLabel lblDelayDownUp = new JLabel("Delay between press/release:");
+	JTextField txtDelayDownUp = new JTextField();
+	JLabel lblMsDownUp = new JLabel("ms");
+	
+	JLabel lblDelay = new JLabel("Delay after this action:");
 	JTextField txtDelay = new JTextField();
 	JLabel lblMs = new JLabel("ms");
 	
@@ -62,7 +66,7 @@ public class AddDialog extends JDialog implements ActionListener {
 		
 		double size[][] =
             {{TableLayoutConstants.FILL}, // column widths
-             {TableLayoutConstants.PREFERRED, 10, TableLayoutConstants.PREFERRED, TableLayoutConstants.FILL, TableLayoutConstants.PREFERRED, 10, TableLayoutConstants.PREFERRED}}; // row heights
+             {TableLayoutConstants.PREFERRED, 10, TableLayoutConstants.PREFERRED, TableLayoutConstants.FILL, TableLayoutConstants.PREFERRED, 10, TableLayoutConstants.PREFERRED, 10, TableLayoutConstants.PREFERRED}}; // row heights
 		this.pnlAll.setLayout(new TableLayout(size));
 		
 		JPanel pnlType = new JPanel();
@@ -88,7 +92,28 @@ public class AddDialog extends JDialog implements ActionListener {
 		this.cards.show(this.pnlEvent, this.typeBox.getSelectedItem().toString());
 		this.pnlAll.add(this.pnlEvent, "0, 2");
 		
+		JPanel pnlDelayDownUp = new JPanel();
+		pnlDelayDownUp.setToolTipText("<html>How long to wait between a mouse or key button press to release it again<br>Some games need a short delay to properly register key/mouse presses</html>");
+		pnlDelayDownUp.setLayout(new BoxLayout(pnlDelayDownUp, BoxLayout.X_AXIS));
+		pnlDelayDownUp.add(this.lblDelayDownUp);
+		pnlDelayDownUp.add(Box.createHorizontalStrut(10));
+		this.txtDelayDownUp.setMaximumSize(new Dimension(70, this.txtDelayDownUp.getPreferredSize().height));
+		this.txtDelayDownUp.setPreferredSize(this.txtDelayDownUp.getMaximumSize());
+		((AbstractDocument)this.txtDelayDownUp.getDocument()).setDocumentFilter(new NumberOnlyFilter());
+		if (actionToEdit != null) {
+			this.txtDelayDownUp.setText(Integer.toString(actionToEdit.getDelay()));
+		} else {
+			this.txtDelayDownUp.setText("0");
+		}
+		pnlDelayDownUp.add(this.txtDelayDownUp);
+		pnlDelayDownUp.add(Box.createHorizontalStrut(5));
+		pnlDelayDownUp.add(this.lblMsDownUp);
+		pnlDelayDownUp.add(Box.createHorizontalGlue());
+		
+		this.pnlAll.add(pnlDelayDownUp, "0, 4");
+		
 		JPanel pnlDelay = new JPanel();
+		pnlDelay.setToolTipText("<html>How long to wait after this action is performed before it goes to the next action</html>");
 		pnlDelay.setLayout(new BoxLayout(pnlDelay, BoxLayout.X_AXIS));
 		pnlDelay.add(this.lblDelay);
 		pnlDelay.add(Box.createHorizontalStrut(10));
@@ -103,7 +128,7 @@ public class AddDialog extends JDialog implements ActionListener {
 		pnlDelay.add(this.lblMs);
 		pnlDelay.add(Box.createHorizontalGlue());
 		
-		this.pnlAll.add(pnlDelay, "0, 4");
+		this.pnlAll.add(pnlDelay, "0, 6");
 		
 		this.btnCancel.addActionListener(this);
 		this.btnSave.addActionListener(this);
@@ -114,7 +139,7 @@ public class AddDialog extends JDialog implements ActionListener {
 		pnlButtons.add(Box.createHorizontalStrut(10));
 		pnlButtons.add(this.btnSave);
 		
-		this.pnlAll.add(pnlButtons, "0, 6");
+		this.pnlAll.add(pnlButtons, "0, 8");
 		
 		this.add(this.pnlAll);
 		this.setVisible(true);
@@ -161,7 +186,8 @@ public class AddDialog extends JDialog implements ActionListener {
 				JOptionPane.showMessageDialog(this, "Not all required fields are set", "Cannot Save", JOptionPane.ERROR_MESSAGE);
 				return;
 			}
-			
+
+			this.autoAction.setDelayDownUp(Integer.parseInt(this.txtDelayDownUp.getText())); // txtDelayDownUp can only contain numbers
 			this.autoAction.setDelay(Integer.parseInt(this.txtDelay.getText())); // txtDelay can only contain numbers
 			this.dispose();
 		}

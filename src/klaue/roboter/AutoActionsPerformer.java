@@ -77,9 +77,11 @@ public class AutoActionsPerformer implements Runnable {
 			
 			if (ao.getType() == EventType.MOUSE) {
 				this.robot.mousePress(ao.getKey());
+				sleepFor(ao.getDelayDownUp());
 				this.robot.mouseRelease(ao.getKey());
 			} else {
 				this.robot.keyPress(ao.getKey());
+				sleepFor(ao.getDelayDownUp());
 				this.robot.keyRelease(ao.getKey());
 			}
 			
@@ -99,6 +101,7 @@ public class AutoActionsPerformer implements Runnable {
 	 * @param delay
 	 */
 	private void sleepFor(int delay) {
+		if (delay == 0) return;
 		int rest = (delay > 100) ? delay % 100 : delay;
 		int fullParts = (delay > 100) ? delay / 100 : 0;
 		

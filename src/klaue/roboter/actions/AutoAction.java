@@ -11,6 +11,7 @@ public abstract class AutoAction implements Serializable {
 	Point mousePosition = new Point(0, 0);
 	int key = 0; // can be keycode of normal key or mouse button code
 	int delay = 0;
+	int delayDownUp = 0;
 	
 	/**
 	 * 
@@ -34,8 +35,16 @@ public abstract class AutoAction implements Serializable {
 		return this.delay;
 	}
 
+	public int getDelayDownUp() {
+		return this.delayDownUp;
+	}
+
 	public void setDelay(int delay) {
 		this.delay = delay;
+	}
+
+	public void setDelayDownUp(int delayDownUp) {
+		this.delayDownUp = delayDownUp;
 	}
 
 	public EventType getType() {
