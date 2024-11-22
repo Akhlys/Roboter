@@ -95,7 +95,7 @@ public class RoboterGui extends JFrame implements ActionListener, ListSelectionL
 		this.hotkeyClick = prefs.getInt("hotkey_click", NativeKeyEvent.VC_F6);
 		this.hotkeyMousePos =  prefs.getInt("hotkey_mousepos", NativeKeyEvent.VC_F7);
 		
-		this.setTitle("Roboter v. " + Version.version + " by Klaue");
+		this.setTitle("Roboter v. " + Version.version + " by Akhlys");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		boolean hotkeysAvailable = false;
